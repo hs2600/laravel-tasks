@@ -14,12 +14,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Models\Task;
+use App\Models\Product;
 use Illuminate\Http\Request;
+
+
+/**
+    * Show products
+    */
+    Route::get('/products', function () {
+        error_log("INFO: get /");
+        return view('products', [
+            'products' => Product::orderBy('sku', 'asc')->paginate(10)
+        ]);
+    });
+
 
 /**
     * Show Task Dashboard
     */
-Route::get('/', function () {
+Route::get('/tasks', function () {
     error_log("INFO: get /");
     return view('tasks', [
         'tasks' => Task::orderBy('created_at', 'asc')->get()
@@ -37,7 +50,7 @@ Route::post('/task', function (Request $request) {
 
     if ($validator->fails()) {
         error_log("ERROR: Add task failed.");
-        return redirect('/')
+        return redirect('/tasks')
             ->withInput()
             ->withErrors($validator);
     }
@@ -56,5 +69,5 @@ Route::delete('/task/{id}', function ($id) {
     error_log('INFO: delete /task/'.$id);
     Task::findOrFail($id)->delete();
 
-    return redirect('/');
+    return redirect('/tasks');
 });
