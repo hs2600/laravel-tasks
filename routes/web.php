@@ -14,19 +14,115 @@ use Illuminate\Support\Facades\Route;
 */
 
 use App\Models\Task;
+use App\Models\Collection;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 
 /**
-    * Show products
+    * Show collections by Material
     */
-    Route::get('/products', function () {
+    Route::get('/collections', function () {
         error_log("INFO: get /");
-        return view('products', [
-            'products' => Product::orderBy('sku', 'asc')->paginate(10)
+        return view('collections', [
+            'collections' => Collection::orderBy('material', 'asc')->where('category', '=', 'Material')->get()
         ]);
     });
+
+
+/**
+    * Show collections by Material/Series
+    */
+    Route::get('/collections/{material}', function ($material) {
+        error_log("INFO: get /");
+        return view('collections_series', [
+            'collections' => Collection::orderBy('series', 'asc')
+                        ->where('material', '=', $material)
+                        ->where('series', '!=', '-')
+                        ->get()
+        ]
+        , [
+            'collection' => Collection::orderBy('material', 'asc')
+            ->selectRaw('description')
+            ->where('category', '=', 'Material')
+            ->where('material', '=', $material)
+            ->limit(1)
+            ->get()
+        ])        
+        ->with('material', ucfirst($material));
+    });
+
+
+/**
+    * Show collections by Material/Series/Size
+    */
+    Route::get('/collections/{material}/{series}', function ($material, $series) {
+        error_log("INFO: get /");
+        return view('collections_size', [
+            'products' => Product::orderBy('size', 'asc')
+                      ->selectRaw('material, series, size')
+                      ->where('material', '=', $material)
+                      ->where('series', '=', $series)
+                      ->groupBy('material', 'series', 'size')
+                      ->get()
+        ]
+        , [
+            'collection' => Collection::orderBy('material', 'asc')
+            ->selectRaw('description')
+            ->where('material', '=', $material)
+            ->where('series', '=', $series)            
+            ->limit(1)
+            ->get()
+        ])        
+        ->with('material', ucfirst($material))
+        ->with('series', ucfirst($series))
+        ;
+    });
+
+
+
+/**
+    * Show size
+    */
+    Route::get('/collections/{material}/{series}/{size}', function ($material, $series, $size) {
+        error_log("INFO: get /");
+        return view('products_size', [
+          'products' => Product::orderBy('item', 'asc')
+                        ->where('material', '=', $material)
+                        ->where('series', '=', $series)
+                        ->where('size', '=', str_replace('_', '/', $size))
+                        ->paginate(10)
+        ])
+        ->with('material', ucfirst($material))
+        ->with('series', ucfirst($series))
+        ->with('size', ucfirst($size))
+        ;
+    });
+
+
+/**
+     * Show products
+     */
+    Route::get('/products', function () {
+      error_log("INFO: get /");
+      return view('products', [
+        'products' => Product::orderBy('item', 'asc')->paginate(10)
+      ]);
+    });
+
+
+/**
+     * Show products
+     */
+    Route::get('/products/{id}', function ($id) {
+      error_log("INFO: get /");
+      return view('products', [
+        'products' => Product::orderBy('item', 'asc')
+        ->where('sku', '=', $id)
+        ->get()
+      ]);
+    });
+
 
 
 /**
