@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div class="header-container" style="background-image: url(/assets/images/hd_bg.jpg) !important;">
+  <div style="background-color: rgba(5,64,60,0.90); padding-top: 20px !important; padding: 20px;">
+
+    <div class="container">
+      <div class="row center-block">
+        <h1>{{ $series }}</h1>
+      </div>
+      <div class="center-block text-justify">
+        <h4 style="font-family: Times New Roman;">
+          @foreach ($collection as $collection)
+          {{ $collection->description }}
+          @endforeach
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="col-md">
 
@@ -8,17 +27,12 @@
       <div class="panel-body">
         <a href="/collections">Collections</a> / <a href="/collections/{{ $material }}">{{ $material }}</a> / {{ $series }}
       </div>
-      <div class="panel-body">
-        @foreach ($collection as $collection)
-        {{ $collection->description }}
-        @endforeach
-      </div>
     </div>
 
     @if (count($products) > 0)
     <div class="panel panel-default">
       <div class="panel-heading">
-        Size
+        {{ $series }} Collections
       </div>
 
       <div class="panel-body">

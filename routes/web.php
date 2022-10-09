@@ -30,6 +30,19 @@ use Illuminate\Http\Request;
     });
 
 
+    /**
+    * Show collections by Series (All)
+    */
+    Route::get('/collections/series', function () {
+        error_log("INFO: get /");
+        return view('collections_series_all', [
+            'collections' => Collection::orderBy('series', 'asc')
+                        ->where('series', '!=', '-')
+                        ->paginate(15)
+        ]);
+    });
+
+
 /**
     * Show collections by Material/Series
     */
@@ -39,7 +52,7 @@ use Illuminate\Http\Request;
             'collections' => Collection::orderBy('series', 'asc')
                         ->where('material', '=', $material)
                         ->where('series', '!=', '-')
-                        ->get()
+                        ->paginate(15)
         ]
         , [
             'collection' => Collection::orderBy('material', 'asc')
@@ -116,11 +129,18 @@ use Illuminate\Http\Request;
      */
     Route::get('/products/{id}', function ($id) {
       error_log("INFO: get /");
-      return view('products', [
+      return view('product', [
         'products' => Product::orderBy('item', 'asc')
+        ->leftjoin('collections', function ($join) {
+        $join->on('products.material', '=', 'collections.material')
+          ->On('products.series', '=', 'collections.series');
+        })
+        ->select('products.*', 'collections.series_desc')
         ->where('sku', '=', $id)
+        ->limit(1)
         ->get()
-      ]);
+      ])
+      ;
     });
 
 
