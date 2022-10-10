@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-  <div class="col-md" style="padding-bottom: 20px;">
+  <div class="col-md" style="padding-bottom: 20px; border: 0px solid red;">
     <div class="panel-body">
       @foreach ($products as $product)
       <a href="/collections">Collections</a>
@@ -13,7 +13,7 @@
       @endforeach
     </div>
 
-    <div class="col col-md-7" style="padding: 0px;">
+    <div class="col-md-7" style="padding: 0px;">
 
       @foreach ($products as $product)
 
@@ -28,7 +28,10 @@
       }
       ?>
 
+      <img src="{{ $image }}" style="width: 100%; max-height: 495px;" alt="{{ $product->sku }} product image" class="image img-responsive" id="expandedImg">
+
     </div>
+
     <div class="col-md-5">
       <span class="product-title">{{ ucwords(strtolower($product->description)) }}</span>
       <hr style="margin-top: 10px;">
@@ -63,23 +66,6 @@
           <span class="product-price"><b><i>{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
         </div>
       </div>
-
-
-      <img src="{{ $image }}" style="width: 100%; max-height: 445px;" alt="{{ $product->sku }} product image" class="image img-responsive" id="expandedImg">
-
-    </div>
-    <div class="col-md-5">
-      <span class="product-title">{{ $product->description }}</span>
-      <hr style="margin-top: 10px;">
-
-      Material: {{ $product->material }} <br>
-      Series: {{ $product->series }} <br>
-      Size: {{ $product->size }} <br>
-      Color: {{ $product->color }} <br>
-      Finish: {{ $product->finish }}
-      <p>&nbsp;</p>
-      <p class="product-description">{{ $product->series_desc }}</p>
-      <span class="product-price">{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City.</span>
 
       <hr>
       @endforeach
