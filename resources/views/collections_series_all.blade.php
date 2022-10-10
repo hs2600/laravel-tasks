@@ -37,15 +37,19 @@
       $path = $collection->material . '/' . str_replace('/', '_', $category);
       $image = $collection->series;
       $image = str_replace(' ', '_', $image);
-      $image = $collection->material . '/' . $image . '.png';
+      $image = '/assets/images/products/'.$collection->material . '/' . $image . '.png';
 
       $path = strtolower($path);
       $image = strtolower($image);
     } else {
       $category = $collection->material;
-      $image = str_replace(' ', '_', $category) . '_h.png';
+      $image = '/assets/images/products/'.str_replace(' ', '_', $category) . '_h.png';
       $path = strtolower($category);
       $image = strtolower($image);
+    }
+
+    if ($collection->img_url != ''){
+      $image = $collection->img_url;
     }
     ?>
 
@@ -53,7 +57,7 @@
       <span class="{{ $featured }}">{{ ucwords($featured) }}</span>
 
       <a href="/collections/{{ $path }}">
-        <img src="/assets/images/products/{{ $image }}" class="img-preview" style="width: 100%;">
+        <img src="{{ $image }}" class="img-preview" style="width: 100%;">
         <span class="middle-vis">
           {{ $category }} <span class="fa fa-arrow-circle-right"></span>
         </span>

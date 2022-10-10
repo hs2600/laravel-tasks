@@ -20,7 +20,7 @@
 
 
       <?php
-      //print_r($product);
+      //generate image path
 
       $image = $product->img_url;
       $material_desc = $product->material_desc;
@@ -31,6 +31,11 @@
         $image = $product->material . '/' . $image . '.png';
         $image = '/assets/images/products/' . $image;
       }
+
+      if ($product->img_url == '' and $product->series_img_url != ''){
+        $image = $product->series_img_url;
+      }
+
       ?>
 
       <img src="{{ $image }}" style="width: 100%; max-height: 495px;" alt="{{ $product->sku }} product image" class="image img-responsive">
@@ -68,7 +73,7 @@
       <div style="background-color: #fafafa; padding: 5px; margin-bottom: 20px;
         border-bottom: 1px solid #ddd;">
         <div class="">
-          <span class="product-price"><b><i>{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
+          <span class="product-price"><b><i>{{ number_format($product->qty,2) }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
         </div>
       </div>
 

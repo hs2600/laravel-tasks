@@ -39,6 +39,7 @@ use Illuminate\Http\Request;
             'collections' => Collection::orderBy('status', 'desc')
                         ->orderBy('series', 'asc')
                         ->where('series', '!=', '-')
+                        ->where('status', '!=', '1')                        
                         ->paginate(15)
         ]);
     });
@@ -54,6 +55,7 @@ use Illuminate\Http\Request;
                         ->orderBy('series', 'asc')
                         ->where('material', '=', $material)
                         ->where('series', '!=', '-')
+                        ->where('status', '!=', '1')                        
                         ->paginate(15)
         ]
         , [
@@ -78,6 +80,7 @@ use Illuminate\Http\Request;
                       ->selectRaw('material, series, size')
                       ->where('material', '=', $material)
                       ->where('series', '=', $series)
+                      ->where('status', '!=', '1')
                       ->groupBy('material', 'series', 'size')
                       ->get()
         ]
@@ -137,7 +140,7 @@ use Illuminate\Http\Request;
         $join->on('products.material', '=', 'collections.material')
           ->On('products.series', '=', 'collections.series');
         })
-        ->select('products.*', 'collections.description as material_desc', 'collections.series_desc')
+        ->select('products.*', 'collections.description as material_desc', 'collections.series_desc', 'collections.img_url as series_img_url')
         ->where('sku', '=', $id)
         ->limit(1)
         ->get()
