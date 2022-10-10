@@ -91,22 +91,47 @@ h1 {
   transition: .5s ease;
   opacity: 1;
   position: absolute;
-  bottom: 20%;
+  bottom: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   width: 50%;
+  
+  background-color: white;
+  color: black;
+  padding: 10px;
+  text-align: center;
+  border-radius: 2px;
+  border-bottom: 4px solid gray;
+  text-transform: uppercase;
 }
 
 .featured {
-  padding: 0px;
-  background-color: #eb4c42;
-  border: 0px solid;
+  padding: 5px 15px;
+  background-color: #f88379;
+  border: 1px solid #efefef;
+  border-radius: 2px;
   text-align: center;
   color: white;
-  opacity: 0.5;
   position: absolute;
-  transform: translate(0, -35px);
+  top: 5px;
+  left: 30px;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.new {
+  padding: 5px 15px;
+  background-color: #fff951;
+  border: 1px solid #efefef;
+  border-radius: 2px;
+  text-align: center;
+  color: black;
+  position: absolute;
+  top: 5px;
+  left: 30px;
+  opacity: 0.8;
+  z-index: 1;
 }
 
 .page-content {
