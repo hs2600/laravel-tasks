@@ -36,7 +36,8 @@ use Illuminate\Http\Request;
     Route::get('/collections/series', function () {
         error_log("INFO: get /");
         return view('collections_series_all', [
-            'collections' => Collection::orderBy('series', 'asc')
+            'collections' => Collection::orderBy('status', 'desc')
+                        ->orderBy('series', 'asc')
                         ->where('series', '!=', '-')
                         ->paginate(15)
         ]);
@@ -49,7 +50,8 @@ use Illuminate\Http\Request;
     Route::get('/collections/{material}', function ($material) {
         error_log("INFO: get /");
         return view('collections_series', [
-            'collections' => Collection::orderBy('series', 'asc')
+            'collections' => Collection::orderBy('status', 'desc')
+                        ->orderBy('series', 'asc')
                         ->where('material', '=', $material)
                         ->where('series', '!=', '-')
                         ->paginate(15)

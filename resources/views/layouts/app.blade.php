@@ -53,8 +53,10 @@
     .btn-info {
       color: #fff;
       background-color: #d42020;
-      /* border-color: #be1d1d; */
+      border-color: #be1d1d;
     }
+
+    .btn-info:hover, .btn-info:focus { background-color: #d47520; border-color: #fff; }
 
     .product-title {
       font-family: "Times New Roman";
@@ -117,7 +119,7 @@
           <span class="icon-bar"></span>
         </button>
 
-        <a class="navbar-brand" href="/collections">
+        <a class="navbar-brand" href="/collections" style="padding: 10px;">
           <img class="invert_effect" src="/assets/images/logo.png" style="width: 75%;">
         </a>
 
@@ -146,19 +148,19 @@
 
         <div class="col-sm-3 col-md-3 col-lg-3">
           <div class="bs-component">
-            MATERIAL<br>
+            COLLECTIONS<br>
             <a href="/collections/ceramic">Ceramic</a><br>
             <a href="/collections/concrete">Concrete</a><br>
             <a href="/collections/glass">Glass</a><br>
-            <a href="/collections/jonathan adler">Jonathan Adler</a><br>
-            <a href="/collections/tommy bahama">Tommy Bahama</a><br>
+            <a href="/collections/ceramic/jonathan adler">Jonathan Adler</a><br>
+            <a href="/collections/glass/tommy bahama">Tommy Bahama</a><br>
             <a href="/collections/">All</a><br>
           </div>
         </div>
 
         <div class="col-sm-3 col-md-3 col-lg-3">
           <div class="bs-component">
-            SERIES<br>
+            FEATURED<br>
             <a href="/collections/ceramic/shelter island">Shelter Island</a><br>
             <a href="/collections/ceramic/momentum">Momentum</a><br>
             <a href="/collections/ceramic/linen">Linen</a><br>
