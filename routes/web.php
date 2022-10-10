@@ -137,7 +137,7 @@ use Illuminate\Http\Request;
         $join->on('products.material', '=', 'collections.material')
           ->On('products.series', '=', 'collections.series');
         })
-        ->select('products.*', 'collections.series_desc')
+        ->select('products.*', 'collections.description as material_desc', 'collections.series_desc')
         ->where('sku', '=', $id)
         ->limit(1)
         ->get()

@@ -3,22 +3,27 @@
 @section('content')
 
 <div class="container">
-  <div class="col-md" style="padding-bottom: 20px; border: 0px solid red;">
-    <div class="panel-body">
+  <div class="col-md" style="padding-bottom: 10px; border: 0px solid red;">
+    <div class="panel-body" style="padding-top: 0px;">
       @foreach ($products as $product)
       <a href="/collections">Collections</a>
       / <a href="/collections/{{ strtolower($product->material) }}">{{ $product->material }}</a>
       / <a href="/collections/{{ strtolower($product->material) }}/{{ strtolower($product->series) }}">{{ $product->series }}</a>
       / <a href="/collections/{{ strtolower($product->material) }}/{{ strtolower($product->series) }}/{{ strtolower(str_replace('/', '_', $product->size)) }}">{{ $product->size }}</a>
       @endforeach
+      <hr>
     </div>
 
-    <div class="col-md-7" style="padding: 0px;">
+    <div class="col-md-7">
 
       @foreach ($products as $product)
 
+
       <?php
+      //print_r($product);
+
       $image = $product->img_url;
+      $material_desc = $product->material_desc;
 
       if ($product->img_url == '') {
         $image = $product->series;
@@ -28,15 +33,15 @@
       }
       ?>
 
-      <img src="{{ $image }}" style="width: 100%; max-height: 495px;" alt="{{ $product->sku }} product image" class="image img-responsive" id="expandedImg">
+      <img src="{{ $image }}" style="width: 100%; max-height: 495px;" alt="{{ $product->sku }} product image" class="image img-responsive">
 
     </div>
 
     <div class="col-md-5">
       <span class="product-title">{{ ucwords(strtolower($product->description)) }}</span>
-      <hr style="margin-top: 10px;">
+      <hr style="margin-top: 10px; border: 0.5px solid #999;">
 
-      <div class="row">
+      <div class="row" style="padding: 10px; margin: 0px; margin-bottom: 15px; background-color: #efefef;">
         <div class="col-sm-6">
           <label class="">Material:</label>
           <span>{{ $product->material }}</span>
@@ -58,10 +63,9 @@
           <span>{{ $product->finish }}</span>
         </div>
       </div>
-      <p>&nbsp;</p>
-      <p class="product-description">{{ $product->series_desc }}</p>
+      <p class="product-description">{{ $product->series_desc }} test</p>
 
-      <div style="background-color: #f6f6f6; border-radius: 0px; padding:10px; padding-left: 30px;">
+      <div style="background-color: #fafafa; padding: 10px;">
         <div class="">
           <span class="product-price"><b><i>{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
         </div>
@@ -93,13 +97,47 @@
   <hr>
 </div>
 
+<style>
+  .series-info {
+    color: #ffffff;
+    font-size: 20px;
+    font-family: "Times New Roman";
+  }
+
+  .series-info h2 {
+    text-transform: uppercase;
+    margin: 0px;
+    font-family: "Times New Roman";
+    font-size: 40px;
+  }
+</style>
+
+<div class="header-container" style="background-image: url(/assets/images/bg.png) !important; background-size: 100%; background-position: bottom; background-repeat: repeat;">
+  <div style="background-color: rgba(206,162,157,0.85); padding: 50px 0px; margin-bottom: 20px;">
+
+    <div class="container series-info">
+
+      <div class="col-md-4" style="vertical-align: top;">
+        <h2>Series overview</h2>
+        <p>&nbsp;</p>
+      </div>
+
+      <div class=" col-md-8">
+        <p>{{ $material_desc }}</p>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="col-md">
 
     @if (count($products) > 0)
     <div class="panel panel-default">
       <div class="panel-heading">
-        Products
+        Color Variations
       </div>
 
       <div class="panel-body">

@@ -5,7 +5,7 @@
   <div class="col-md">
 
     <div class="panel-default">
-      <div class="panel-body">
+      <div class="panel-body" style="padding-top: 0px;">
         <a href="/collections">Collections</a> / <a href="/collections/{{ $material }}">{{ $material }}</a> / <a href="/collections/{{ $material }}/{{ $series }}">{{ $series }}</a> / {{ str_replace('_', '/', $size) }}
       </div>
     </div>
