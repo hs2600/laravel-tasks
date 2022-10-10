@@ -63,15 +63,15 @@
           <span>{{ $product->finish }}</span>
         </div>
       </div>
-      <p class="product-description">{{ $product->series_desc }} test</p>
+      <p class="product-description">{{ $product->series_desc }}</p>
 
-      <div style="background-color: #fafafa; padding: 10px;">
+      <div style="background-color: #fafafa; padding: 5px; margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;">
         <div class="">
           <span class="product-price"><b><i>{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
         </div>
       </div>
 
-      <hr>
       @endforeach
 
       <button class="buy-button btn btn-info enabled" style="width:100%;
@@ -85,8 +85,26 @@
         <div class="col-sm-6" style="padding-bottom: 5px;">
           <button type="button" class="btn btn-warning enabled" style="text-align: center; font-weight: bold; padding: 5px; padding-left: 20px; padding-right: 20px;">CART <i class="fa fa-shopping-cart"></i></button>
         </div>
-
       </div>
+
+
+      <div style="border: 0px solid #e9e9e9;  ">
+
+          <ul class="cate">
+            <li class="drop-menu">
+              <a style="cursor: pointer;" class="title collapsed" aria-expanded="false" data-toggle="collapse" data-target="#Cat">
+                 <span class="navbar-toggler-icon">
+                  <h5 style="color: black;">DOCUMENTATION</h5>
+                </span> </a>
+              <div class="collapsed collapse" id="Cat" aria-expanded="false" style="padding-left: 10px; line-height: 30px;">
+              Series Brochures &nbsp;<span class="fa fa-download"></span><BR>
+              Applications & Testing &nbsp;<span class="fa fa-download"></span><BR>
+              Care & Maintenance &nbsp;<span class="fa fa-download"></span><BR>
+              </div>
+            </li>
+          </ul>
+      </div>
+
     </div>
 
     <div style="clear:both;">
