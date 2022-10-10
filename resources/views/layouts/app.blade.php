@@ -19,88 +19,8 @@
 
   <style>
     body {
-      font-family: 'Lato';
       padding-top: 75px;
-    }
-
-    .fa-btn {
-      margin-right: 6px;
-    }
-
-    .footer {
-      position: absolute;
-      width: 100%;
-      padding-top: 10px;
-      padding-bottom: 20px;
-      background: url(/images/pattern.svg) no-repeat;
-      background-size: 100%;
-      background-color: #04403c;
-      color: #FFFFFF;
-      font-size: 15px;
-    }
-
-    .footer a {
-      color: #999;
-    }
-
-    ol,
-    ul {
-      margin-top: 0;
-      margin-bottom: 10px;
-      margin-left: -40px;
-    }
-
-    .btn-info {
-      color: #fff;
-      background-color: #d42020;
-      /* border-color: #be1d1d; */
-    }
-
-    .product-title {
-      font-family: "Times New Roman";
-      font-size: 25px;
-      margin-bottom: 0px;
-      display: inline-block;
-      width: 100%;
-    }
-
-    .product-description {
-      font-family: "Times New Roman";
-      font-size: 18px;
-    }
-
-    .product-price {
-      font-family: "Times New Roman";
-      font-size: 20px;
-      font-style: italic;
-    }
-
-    .header-container {
-      background-image: linear-gradient(131deg, #E93046 0%, #E93046 100%) !important;
-      margin-top: -20px;
-      margin-bottom: 10px;
-      background-attachment: fixed;
-    }
-
-    .header-container h1 {
-      font-family: "Playfair Display,Georgia,Times New Roman,serif";
-      font-weight: 800;
-      font-size: 50px;
-      color: #ffffff !important;
-      line-height: 1.5em;
-    }
-
-    .header-container h4 {
-      color: #ffffff !important;
-    }
-
-    .navbar {
-      border-width: 0 1px 4px 1px;
-      border-color: #e6e6e6;
-    }
-
-    .invert_effect {
-            filter: invert(100%);
+      font-family: lato, source sans pro, sans-serif;
     }
   </style>
 </head>

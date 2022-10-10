@@ -35,17 +35,40 @@
 
                 </div>
                 <div class="col-md-5">
-                  <span class="product-title">{{ $product->description }}</span>
+                  <span class="product-title">{{ ucwords(strtolower($product->description)) }}</span>
                   <hr style="margin-top: 10px;">
 
-                  Material: {{ $product->material }} <br>
-                  Series: {{ $product->series }} <br>
-                  Size: {{ $product->size }} <br>
-                  Color: {{ $product->color }} <br>
-                  Finish: {{ $product->finish }}
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label class="">Material:</label>
+                      <span>{{ $product->material }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="">Series:</label>
+                      <span>{{ $product->series }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="">Size:</label>
+                      <span>{{ $product->size }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="">Color:</label>
+                      <span>{{ $product->color }}</span>
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="">Finish:</label>
+                      <span>{{ $product->finish }}</span>
+                    </div>
+                  </div>
                   <p>&nbsp;</p>
                   <p class="product-description">{{ $product->series_desc }}</p>
-                  <span class="product-price">{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City.</span>
+
+                  <div style="background-color: #f6f6f6; border-radius: 0px; padding:10px; padding-left: 30px;">
+                      <div class="">
+                        <span class="product-price"><b><i>{{ $product->qty }} {{ strtolower($product->uofm) }} in stock in Harbor City</i></b></span>
+                      </div>
+                  </div>
+
 
                   <hr>
                   @endforeach
