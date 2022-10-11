@@ -25,14 +25,52 @@
       $image = $product->img_url;
       $material_desc = $product->material_desc;
 
+      //print_r($_SERVER);
+      
+      //if item image url is blank, use local image if exists, otherwise use series image
       if ($product->img_url == '') {
-        $image = $product->series;
-        $image = str_replace(' ', '_', $image);
-        $image = $product->material . '/' . $image . '.png';
+        $image = $product->material . '/' . $product->series;
+        $image = '/assets/images/products/' . $image;
+        $finish = $product->finish;
+
+        if($finish == ''){
+          $finish = '-';
+        }
+
+        $filename = $image.'/'.$product->series.'_'.$product->size.'_'.$product->color.'_'.$finish.'.jpg';
+        $filename = strtolower(str_replace(' ', '_', $filename));
+        $filename = str_replace('_-', '', $filename);
+        $filename = str_replace('hexagon', 'hex', $filename);
+        $filename = str_replace('japonaise', 'japon', $filename);
+        $full_filename = $_SERVER["DOCUMENT_ROOT"] . $filename;
+
+        $exists = false;
+        if (file_exists($full_filename)) {
+          $image = $filename;
+          $exists = true;
+          //echo 'file exists!';
+        } else {
+          $image = $image.'.png';
+          //echo 'not exists!';
+        }
+        $image = strtolower(str_replace(' ', '_', $image));
+
+      }
+
+      //if item has image url and is not located on http path, use local path
+      if ($product->img_url != '' and strpos($product->img_url, 'http') === false) {
+        $image = $product->material . '/' . $product->series . '/' . $product->img_url;
+        $image = strtolower(str_replace(' ', '_', $image));
         $image = '/assets/images/products/' . $image;
       }
 
-      if ($product->img_url == '' and $product->series_img_url != ''){
+      //if item has image url and is located on http path, use image url
+      if ($product->img_url != '' and strpos($product->img_url, 'http') != 0) {
+        $image = $product->img_url;
+      }
+
+      //if item image url is blank and series image url exists, use series url path
+      if ($product->img_url == '' and $exists = false and $product->series_img_url != '') {
         $image = $product->series_img_url;
       }
 
@@ -95,19 +133,19 @@
 
       <div style="border: 0px solid #e9e9e9;  ">
 
-          <ul class="cate">
-            <li class="drop-menu">
-              <a style="cursor: pointer;" class="title collapsed" aria-expanded="false" data-toggle="collapse" data-target="#Cat">
-                 <span class="navbar-toggler-icon">
-                  <h5 style="color: black;">DOCUMENTATION</h5>
-                </span> </a>
-              <div class="collapsed collapse" id="Cat" aria-expanded="false" style="padding-left: 10px; line-height: 30px;">
+        <ul class="cate">
+          <li class="drop-menu">
+            <a style="cursor: pointer;" class="title collapsed" aria-expanded="false" data-toggle="collapse" data-target="#Cat">
+              <span class="navbar-toggler-icon">
+                <h5 style="color: black;">DOCUMENTATION</h5>
+              </span> </a>
+            <div class="collapsed collapse" id="Cat" aria-expanded="false" style="padding-left: 10px; line-height: 30px;">
               Series Brochures &nbsp;<span class="fa fa-download"></span><BR>
               Applications & Testing &nbsp;<span class="fa fa-download"></span><BR>
               Care & Maintenance &nbsp;<span class="fa fa-download"></span><BR>
-              </div>
-            </li>
-          </ul>
+            </div>
+          </li>
+        </ul>
       </div>
 
     </div>
@@ -157,7 +195,7 @@
 <div class="container">
   <div class="col-md">
 
-    @if (count($products) > 0)
+    @if (count($product_colors) > 0)
     <div class="panel panel-default">
       <div class="panel-heading">
         Color Variations
@@ -178,10 +216,10 @@
             <th>UofM</th>
           </thead>
           <tbody>
-            @foreach ($products as $product)
+            @foreach ($product_colors as $product)
             <tr>
               <td class="table-text">
-                <div>{{ $product->sku }}</div>
+                <div><a href="/products/{{ $product->sku }}">{{ $product->sku }}</a></div>
               </td>
               <td class="table-text">
                 <div>{{ $product->item }}</div>

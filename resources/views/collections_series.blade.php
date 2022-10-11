@@ -4,7 +4,7 @@
 
 
 <div class="header-container" style="background-image: url(/assets/images/hd_bg.png) !important; background-size: 100%; background-position: top; background-repeat: no-repeat;">
-  <div style="background-color: rgba(20,64,60,0.75); padding: 20px;">
+  <div style="background-color: rgba(20,64,60,0.75); padding: 20px 0px;">
 
         <div class="container">
             <div class="row center-block">

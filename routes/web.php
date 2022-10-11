@@ -144,6 +144,17 @@ use Illuminate\Http\Request;
         ->where('sku', '=', $id)
         ->limit(1)
         ->get()
+      ], [
+        'product_colors' => Product::orderBy('item', 'asc')
+        ->leftjoin('products as product_colors', function ($join) {
+        $join->on('products.material', '=', 'product_colors.material')
+             ->On('products.series', '=', 'product_colors.series')
+             ->On('products.size', '=', 'product_colors.size');
+        })
+        ->select('product_colors.*')
+        ->where('products.sku', '=', $id)
+        ->where('product_colors.sku', '!=', $id)
+        ->get()
       ])
       ;
     });

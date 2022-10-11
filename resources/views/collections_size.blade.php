@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="header-container" style="background-image: url(/assets/images/hd2_bg.png) !important; background-size: 100%; background-position: bottom; background-repeat: repeat;">
-    <div style="background-color: rgba(5,64,60,0.65); padding: 20px;">
+    <div style="background-color: rgba(5,64,60,0.65); padding: 20px 0px;">
     <div class="container">
       <div class="row center-block">
         <h1>{{ $series }}</h1>

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="header-container" style="background-image: url(/assets/images/hd2_bg.png) !important; background-size: 100%; background-position: top; background-repeat: no-repeat;">
-  <div style="background-color: rgba(5,64,60,0.65); padding: 50px;">
+  <div style="background-color: rgba(5,64,60,0.65); padding: 50px 0px;">
 
     <div class="container">
       <div class="row center-block">
